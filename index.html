@@ -1,74 +1,1937 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" class="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#10131c"><title>Финансовый аналитик — Т-Банк и Сбербанк</title>
-<style>
-:root{color-scheme:dark;--bg:#0e1119;--panel:#171c28;--panel2:#1d2432;--line:#2b3445;--text:#f3f5fa;--muted:#9ca8bb;--lime:#c4f36b;--red:#ff7f87;--blue:#7db8ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b2634 0,#0e1119 52%);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-.wrap{max-width:1100px;margin:auto;padding:22px 16px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:var(--lime);color:#10131c;display:grid;place-items:center;font-weight:900;font-size:22px}.eyebrow{font-size:11px;color:var(--lime);letter-spacing:.14em;text-transform:uppercase}.title{font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-.04em;margin:4px 0}.sub{color:var(--muted);font-size:13px}.badge{border:1px solid var(--line);border-radius:99px;padding:8px 12px;color:var(--muted);font-size:12px;white-space:nowrap}
-.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}.metric,.panel{background:linear-gradient(145deg,#1a202d,#151a25);border:1px solid var(--line);border-radius:18px}.metric{padding:18px}.metric label{color:var(--muted);font-size:12px}.value{font-size:clamp(19px,3.5vw,28px);font-weight:800;letter-spacing:-.03em;margin-top:9px;overflow-wrap:anywhere}.green{color:var(--lime)}.red{color:var(--red)}.grid{display:grid;grid-template-columns: minmax(0, .88fr) minmax(0,1.4fr);gap:16px}.panel{padding:18px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.panel h2{font-size:17px;margin:0;letter-spacing:-.02em}.hint{color:var(--muted);font-size:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}label.field{display:flex;flex-direction:column;gap:7px;color:var(--muted);font-size:12px}.wide{grid-column:1/-1}input,select,textarea{width:100%;background:#101520;border:1px solid #303a4c;color:var(--text);border-radius:10px;padding:12px;font:inherit;min-width:0;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--lime)}textarea{resize:vertical;min-height:44px}button,.filebtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 13px;border-radius:11px;font:600 13px inherit;cursor:pointer;transition:.15s}button:hover,.filebtn:hover{border-color:#7d8da7;filter:brightness(1.1)}button.primary{background:var(--lime);color:#10131c;border-color:var(--lime)}button.danger{color:var(--red)}button:active{transform:scale(.98)}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.bankrow{display:flex;gap:8px;margin-top:12px}.bankrow button{flex:1}.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:12px}th{color:var(--muted);font-weight:600;background:#121722}tr:last-child td{border-bottom:0}.amount{font-weight:750;white-space:nowrap}.empty{text-align:center;color:var(--muted);padding:28px}.tag{display:inline-block;padding:4px 7px;border-radius:6px;background:#263142;color:#c7d2e4;font-size:10px}.income{color:var(--lime)}.expense{color:var(--red)}.smallbtn{padding:6px 8px;font-size:11px}.footer{margin-top:14px;color:var(--muted);font-size:11px;line-height:1.6}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#e8f7ce;color:#17200e;padding:12px 16px;border-radius:12px;font-weight:700;box-shadow:0 10px 35px #0007;z-index:5;max-width:90vw;display:none}.hidden{display:none!important}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.metrics{gap:8px}.metric{padding:13px}.top{align-items:flex-start}.badge{font-size:10px}.wrap{padding:18px 12px 40px}.panel{padding:14px}}
-@media(max-width:380px){.metrics{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center}.value{margin:0}.formgrid{grid-template-columns:1fr}.wide{grid-column:auto}}
-</style></head>
-<body><main class="wrap">
-<header class="top"><div class="brand"><div class="logo">₽</div><div><div class="eyebrow">Personal finance OS</div><h1 class="title">Финансовый аналитик</h1><div class="sub">Т-Банк · Сбербанк · ручной учёт</div></div></div><div class="badge">● Локальный режим</div></header>
-<section class="metrics">
-<div class="metric"><label>Баланс операций</label><div class="value" id="balance">0 ₽</div></div>
-<div class="metric"><label>Доходы</label><div class="value green" id="income">0 ₽</div></div>
-<div class="metric"><label>Расходы</label><div class="value red" id="expense">0 ₽</div></div>
-</section>
-<div class="grid"><section class="panel"><div class="panel-head"><h2>Новая операция</h2><span class="hint">Заполнение вручную</span></div>
-<form id="entryForm"><div class="formgrid">
-<label class="field">Тип операции<select id="type"><option value="expense">Расход</option><option value="income">Доход</option></select></label>
-<label class="field">Банк<select id="bank"><option>Т-Банк</option><option>Сбербанк</option><option>Наличные</option><option>Другой</option></select></label>
-<label class="field">Сумма, ₽<input id="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="1500" required></label>
-<label class="field">Дата<input id="date" type="date" required></label>
-<label class="field">Категория<select id="category"><option>Продукты</option><option>Транспорт</option><option>Жильё</option><option>Кафе и досуг</option><option>Здоровье</option><option>Покупки</option><option>Подписки</option><option>Зарплата</option><option>Перевод</option><option>Другое</option></select></label>
-<label class="field">Комментарий<input id="note" maxlength="120" placeholder="Необязательно"></label>
-</div><div class="actions"><button class="primary" type="submit">＋ Добавить операцию</button><button type="reset" id="clearForm">Очистить</button></div></form>
-<div class="bankrow"><button type="button" id="demoT">＋ Т-Банк</button><button type="button" id="demoS">＋ Сбербанк</button></div>
-<div class="footer">Данные хранятся в локальном хранилище этого браузера на устройстве. Это не подключение к банковскому счёту: операции вводятся вручную.</div>
-</section>
-<section class="panel"><div class="panel-head"><h2>История операций</h2><span id="count" class="hint">0 операций</span></div>
-<div class="filters"><label class="field">Банк<select id="filterBank"><option value="">Все банки</option><option>Т-Банк</option><option>Сбербанк</option><option>Наличные</option><option>Другой</option></select></label><label class="field">Тип<select id="filterType"><option value="">Все операции</option><option value="income">Доходы</option><option value="expense">Расходы</option></select></label><label class="field">С даты<input id="fromDate" type="date"></label><label class="field">По дату<input id="toDate" type="date"></label></div>
-<div class="actions" style="margin:0 0 12px"><button id="exportBtn" type="button">Экспорт CSV</button><label class="filebtn">Импорт CSV<input id="importFile" type="file" accept=".csv,text/csv" class="hidden"></label><button id="resetBtn" type="button" class="danger">Удалить все</button></div>
-<div class="tablewrap"><table><thead><tr><th>Дата</th><th>Операция</th><th>Категория / банк</th><th>Сумма</th><th></th></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty">Пока нет операций.<br>Добавь первую слева.</div></div>
-<div class="footer" id="summary">Добавь операции, чтобы увидеть сводку.</div></section></div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-</main>
-<script>
-(function(){
-'use strict';
-const $=id=>document.getElementById(id), KEY='financeAnalyticsTransactions_v1';
-let tx=[];
-try{const raw=localStorage.getItem(KEY);tx=raw?JSON.parse(raw):[];if(!Array.isArray(tx))tx=[];}catch(e){tx=[];}
-const money=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:2}).format(n);
-const today=()=>new Date().toLocaleDateString('en-CA');
-$('date').value=today();
-function toast(msg){const el=$('toast');el.textContent=msg;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',2400);}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(tx));}catch(e){toast('Не удалось сохранить данные браузера');}}
-function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function visible(){return tx.filter(t=>(!$('filterBank').value||t.bank===$('filterBank').value)&&(!$('filterType').value||t.type===$('filterType').value)&&(!$('fromDate').value||t.date>=$('fromDate').value)&&(!$('toDate').value||t.date<=$('toDate').value)).sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created);}
-function render(){
-const list=visible(), inc=list.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0), exp=list.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
-$('income').textContent=money(inc);$('expense').textContent=money(exp);$('balance').textContent=money(inc-exp);$('balance').className='value '+(inc-exp<0?'red':'green');$('count').textContent=list.length+' '+(list.length===1?'операция':list.length>1&&list.length<5?'операции':'операций');
-$('empty').classList.toggle('hidden',list.length>0);
-$('rows').innerHTML=list.map(t=>'<tr><td>'+safe(t.date)+'</td><td><span class="tag">'+(t.type==='income'?'Доход':'Расход')+'</span><div style="margin-top:5px;color:#9ca8bb">'+safe(t.note||'—')+'</div></td><td>'+safe(t.category)+'<div style="margin-top:5px;color:#9ca8bb">'+safe(t.bank)+'</div></td><td class="amount '+(t.type==='income'?'income':'expense')+'">'+(t.type==='income'?'+':'−')+money(t.amount)+'</td><td><button type="button" class="smallbtn danger" data-delete="'+safe(t.id)+'" aria-label="Удалить операцию">✕</button></td></tr>').join('');
-const cats={};list.filter(t=>t.type==='expense').forEach(t=>cats[t.category]=(cats[t.category]||0)+t.amount);
-const top=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,3);
-$('summary').textContent=list.length?('Топ категорий расходов: '+(top.length?top.map(([k,v])=>k+' — '+money(v)).join(' · '):'нет расходов')+'. Сводка учитывает выбранные фильтры.'):'Добавь операции, чтобы увидеть сводку.';
-}
-$('entryForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('amount').value);if(!Number.isFinite(amount)||amount<=0){toast('Укажи сумму больше нуля');return;}tx.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),type:$('type').value,bank:$('bank').value,amount,date:$('date').value||today(),category:$('category').value,note:$('note').value.trim(),created:Date.now()});save();render();$('amount').value='';$('note').value='';$('amount').focus();toast('Операция добавлена');});
-$('rows').addEventListener('click',e=>{const b=e.target.closest('[data-delete]');if(!b)return;const item=tx.find(t=>t.id===b.dataset.delete);if(item&&confirm('Удалить операцию на '+money(item.amount)+'?')){tx=tx.filter(t=>t.id!==item.id);save();render();toast('Операция удалена');}});
-['filterBank','filterType','fromDate','toDate'].forEach(id=>$(id).addEventListener('change',render));
-$('clearForm').addEventListener('click',()=>setTimeout(()=>{$('date').value=today();},0));
-function addDemo(bank){$('bank').value=bank;$('type').value='expense';$('category').value='Продукты';$('amount').focus();toast('Банк выбран: '+bank+' — заполни сумму и добавь операцию');}
-$('demoT').addEventListener('click',()=>addDemo('Т-Банк'));$('demoS').addEventListener('click',()=>addDemo('Сбербанк'));
-$('resetBtn').addEventListener('click',()=>{if(!tx.length){toast('Операций пока нет');return;}if(confirm('Удалить все '+tx.length+' операций? Это действие нельзя отменить.')){tx=[];save();render();toast('История очищена');}});
-function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"';}
-$('exportBtn').addEventListener('click',()=>{if(!tx.length){toast('Нет операций для экспорта');return;}const head=['date','type','bank','amount','category','note'];const lines=[head,...tx.map(t=>head.map(k=>t[k]))].map(row=>row.map(csvCell).join(';'));const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='finance-operations.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('CSV подготовлен');});
-$('importFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const text=await f.text();const lines=text.replace(/^\ufeff/,'').split(/\r?\n/).filter(Boolean);if(lines.length<2)throw Error('empty');const parse=line=>{const out=[];let v='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&q&&line[i+1]==='"'){v+='"';i++;}else if(c==='"')q=!q;else if((c===';'||c===',')&&!q){out.push(v);v='';}else v+=c;}out.push(v);return out;};const headers=parse(lines[0]).map(x=>x.trim().toLowerCase());const idx=k=>headers.indexOf(k);const get=(r,k)=>idx(k)>=0?r[idx(k)]||'':'';let added=0;for(const line of lines.slice(1)){const r=parse(line),amount=Number(String(get(r,'amount')).replace(',','.'));if(!Number.isFinite(amount)||amount<=0)continue;const type=get(r,'type')==='income'?'income':'expense';tx.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),date:/^\d{4}-\d{2}-\d{2}$/.test(get(r,'date'))?get(r,'date'):today(),type,bank:get(r,'bank')||'Другой',amount,category:get(r,'category')||'Другое',note:get(r,'note'),created:Date.now()+added});added++;}save();render();toast('Импортировано операций: '+added);}catch(err){toast('Не удалось прочитать CSV. Проверь формат файла.');}finally{e.target.value='';}});
-render();
-})();
-</script></body></html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Финансовый Аналитик | Т-Банк & Сбербанк</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+  <!-- Tesseract.js OCR CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    if (window.tailwind) window.tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            tbank: {
+              DEFAULT: '#FFDD2D',
+              dark: '#E5C417',
+              bg: '#222222',
+              text: '#333333'
+            },
+            sber: {
+              DEFAULT: '#21A038',
+              dark: '#1B822E',
+              bg: '#14461B',
+              light: '#E8F5E9'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+
+    /* === STANDALONE FALLBACK CSS (works offline & in iOS QuickLook without CDN) === */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #020617;
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    .hidden, input.hidden { display: none !important; }
+    svg { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    img { max-width: 100%; height: auto; display: block; }
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+    button { cursor: pointer; background: none; border: none; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 0.75rem; border-bottom: 1px solid rgba(30, 41, 59, 0.7); }
+    thead { background-color: rgba(2, 6, 23, 0.7); color: #94a3b8; font-size: 11px; text-transform: uppercase; }
+
+    /* Layout & Flex/Grid utilities */
+    .min-h-screen { min-height: 100vh; }
+    .flex { display: flex; }
+    .inline-flex { display: inline-flex; }
+    .flex-col { flex-direction: column; }
+    .flex-wrap { flex-wrap: wrap; }
+    .flex-1 { flex: 1 1 0%; }
+    .shrink-0 { flex-shrink: 0; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .items-stretch { align-items: stretch; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .justify-end { justify-content: flex-end; }
+    .grid { display: grid; }
+    .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gap-1\.5 { gap: 0.375rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .space-x-1 > * + * { margin-left: 0.25rem; }
+    .space-x-1\.5 > * + * { margin-left: 0.375rem; }
+    .space-x-2 > * + * { margin-left: 0.5rem; }
+    .space-x-3 > * + * { margin-left: 0.75rem; }
+    .space-x-3\.5 > * + * { margin-left: 0.875rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-2\.5 > * + * { margin-top: 0.625rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+
+    /* Sizing & Spacing */
+    .max-w-7xl { max-width: 80rem; }
+    .max-w-md { max-width: 28rem; }
+    .max-w-sm { max-width: 24rem; }
+    .w-full { width: 100%; }
+    .w-20 { width: 5rem; }
+    .w-14 { width: 3.5rem; } .h-14 { height: 3.5rem; }
+    .w-12 { width: 3rem; }   .h-12 { height: 3rem; }
+    .w-10 { width: 2.5rem; } .h-10 { height: 2.5rem; }
+    .w-8 { width: 2rem; }    .h-8 { height: 2rem; }
+    .w-7 { width: 1.75rem; } .h-7 { height: 1.75rem; }
+    .w-6 { width: 1.5rem; }  .h-6 { height: 1.5rem; }
+    .w-5 { width: 1.25rem; } .h-5 { height: 1.25rem; }
+    .w-4 { width: 1rem; }    .h-4 { height: 1rem; }
+    .w-3\.5 { width: 0.875rem; } .h-3\.5 { height: 0.875rem; }
+    .w-2 { width: 0.5rem; }  .h-2 { height: 0.5rem; }
+    .h-1\.5 { height: 0.375rem; }
+    .h-16 { height: 4rem; }
+    .h-64 { height: 16rem; }
+    .h-72 { height: 18rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mt-0\.5 { margin-top: 0.125rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-3 { margin-top: 0.75rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mr-1 { margin-right: 0.25rem; }
+    .p-1 { padding: 0.25rem; }
+    .p-2\.5 { padding: 0.625rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-4 { padding: 1rem; }
+    .p-5 { padding: 1.25rem; }
+    .p-6 { padding: 1.5rem; }
+    .px-1\.5 { padding-left: 0.375rem; padding-right: 0.375rem; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+    .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .px-3\.5 { padding-left: 0.875rem; padding-right: 0.875rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
+    .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+    .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .pb-3 { padding-bottom: 0.75rem; }
+    .pt-2 { padding-top: 0.5rem; }
+    .pt-3 { padding-top: 0.75rem; }
+
+    /* Colors, Backgrounds & Borders */
+    .bg-slate-950 { background-color: #020617; }
+    .bg-slate-950\/40 { background-color: rgba(2, 6, 23, 0.4); }
+    .bg-slate-950\/60 { background-color: rgba(2, 6, 23, 0.6); }
+    .bg-slate-950\/80 { background-color: rgba(2, 6, 23, 0.8); }
+    .bg-slate-900 { background-color: #0f172a; }
+    .bg-slate-900\/80 { background-color: rgba(15, 23, 42, 0.85); }
+    .bg-slate-900\/90 { background-color: rgba(15, 23, 42, 0.92); }
+    .bg-slate-800 { background-color: #1e293b; }
+    .bg-emerald-500 { background-color: #10b981; }
+    .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.12); }
+    .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.2); }
+    .bg-amber-400 { background-color: #fbbf24; }
+    .bg-amber-400\/10 { background-color: rgba(251, 191, 36, 0.12); }
+    .bg-red-500 { background-color: #ef4444; }
+    .bg-red-600 { background-color: #dc2626; }
+    .bg-red-500\/10 { background-color: rgba(239, 68, 68, 0.12); }
+    .bg-red-950\/40 { background-color: rgba(69, 10, 10, 0.45); }
+    .bg-cyan-500\/10 { background-color: rgba(6, 182, 212, 0.12); }
+    .bg-cyan-500\/20 { background-color: rgba(6, 182, 212, 0.2); }
+    .bg-\[\#FFDD2D\] { background-color: #FFDD2D; }
+    .bg-\[\#FFDD2D\]\/10 { background-color: rgba(255, 221, 45, 0.12); }
+    .bg-\[\#FFDD2D\]\/20 { background-color: rgba(255, 221, 45, 0.2); }
+    .bg-\[\#21A038\] { background-color: #21A038; }
+    .bg-\[\#21A038\]\/10 { background-color: rgba(33, 160, 56, 0.14); }
+    .bg-\[\#21A038\]\/20 { background-color: rgba(33, 160, 56, 0.22); }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, #f59e0b, #10b981); }
+    .bg-gradient-to-tr { background-image: linear-gradient(to top right, #f59e0b, #10b981, #06b6d4); }
+    .bg-gradient-to-br { background-image: linear-gradient(to bottom right, #34d399, #06b6d4); }
+    .from-slate-900 { background-image: linear-gradient(to right, #0f172a, #1e293b, #0f172a); }
+    .from-emerald-950\/40 { background-image: linear-gradient(to right, rgba(2, 44, 34, 0.5), #0f172a, rgba(69, 26, 3, 0.35)); }
+
+    .text-white { color: #ffffff; }
+    .text-slate-100 { color: #f1f5f9; }
+    .text-slate-200 { color: #e2e8f0; }
+    .text-slate-300 { color: #cbd5e1; }
+    .text-slate-400 { color: #94a3b8; }
+    .text-slate-500 { color: #64748b; }
+    .text-slate-950 { color: #020617; }
+    .text-emerald-300 { color: #6ee7b7; }
+    .text-emerald-400 { color: #34d399; }
+    .text-amber-300 { color: #fcd34d; }
+    .text-amber-400 { color: #fbbf24; }
+    .text-cyan-300 { color: #67e8f9; }
+    .text-cyan-400 { color: #22d3ee; }
+    .text-red-400 { color: #f87171; }
+    .text-\[\#FFDD2D\] { color: #FFDD2D; }
+
+    .border { border: 1px solid #1e293b; }
+    .border-2 { border: 2px solid #334155; }
+    .border-dashed { border-style: dashed; }
+    .border-b { border-bottom: 1px solid #1e293b; }
+    .border-t { border-top: 1px solid #1e293b; }
+    .border-slate-700 { border-color: #334155; }
+    .border-slate-800 { border-color: #1e293b; }
+    .border-emerald-500\/20 { border-color: rgba(16, 185, 129, 0.25); }
+    .border-amber-400\/20, .border-amber-400\/30 { border-color: rgba(251, 191, 36, 0.3); }
+    .border-red-800\/40 { border-color: rgba(153, 27, 27, 0.45); }
+
+    .rounded { border-radius: 0.25rem; }
+    .rounded-md { border-radius: 0.375rem; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-2xl { border-radius: 1rem; }
+    .rounded-full { border-radius: 9999px; }
+
+    /* Typography */
+    .text-\[10px\] { font-size: 10px; }
+    .text-\[11px\] { font-size: 11px; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-base { font-size: 1rem; }
+    .text-xl { font-size: 1.25rem; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-extrabold { font-weight: 800; }
+    .uppercase { text-transform: uppercase; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .whitespace-nowrap { white-space: nowrap; }
+
+    /* Positioning */
+    .sticky { position: sticky; }
+    .fixed { position: fixed; }
+    .relative { position: relative; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .top-0 { top: 0; }
+    .bottom-4 { bottom: 1rem; }
+    .right-4 { right: 1rem; }
+    .z-40 { z-index: 40; }
+    .z-50 { z-index: 50; }
+    .overflow-hidden { overflow: hidden; }
+    .overflow-x-auto { overflow-x: auto; }
+    .pointer-events-none { pointer-events: none; }
+    .pointer-events-auto { pointer-events: auto; }
+
+    /* Inputs & Selects fallback styling */
+    input[type="text"], input[type="number"], input[type="date"], select {
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      border-radius: 0.5rem;
+      padding: 0.375rem 0.625rem;
+    }
+
+    /* Responsive Media Queries */
+    @media (min-width: 640px) {
+      .sm\:inline { display: inline !important; }
+      .sm\:block { display: block !important; }
+      .sm\:flex-row { flex-direction: row; }
+      .sm\:items-center { align-items: center; }
+      .sm\:w-auto { width: auto; }
+      .sm\:text-lg { font-size: 1.125rem; }
+      .sm\:text-2xl { font-size: 1.5rem; }
+      .sm\:text-sm { font-size: 0.875rem; }
+    }
+    @media (min-width: 768px) {
+      .md\:inline { display: inline !important; }
+      .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1024px) {
+      .lg\:flex-row { flex-direction: row; }
+      .lg\:items-center { align-items: center; }
+      .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .lg\:w-96 { width: 24rem; }
+      .lg\:w-72 { width: 18rem; }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.5);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.8);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-amber-400 selection:text-slate-900">
+  <!-- Static help remains visible if iOS Files Quick Look blocks JavaScript. -->
+  <div id="runtimeNotice" role="status" style="margin:12px;padding:12px 14px;border:1px solid #b45309;border-radius:12px;background:#451a03;color:#fef3c7;font:14px/1.45 -apple-system,BlinkMacSystemFont,sans-serif;">
+    <strong>Важно для iPhone:</strong> если кнопки не реагируют в предпросмотре приложения «Файлы», это ограничение предпросмотра — он может не запускать JavaScript. Откройте этот HTML в Safari или другом браузере. После успешного запуска приложения это сообщение исчезнет.
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-950/40">
+          <svg width="24" height="24" class="w-6 h-6 text-slate-950 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">FinAnalytics AI</h1>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Т-Банк & Сбер</span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">Анализ скриншотов чеков, расходов и персональные инсайты</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-1.5 sm:space-x-2">
+        <button id="btnOpenManualModal" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-1" title="Добавить операцию вручную">
+          <svg width="16" height="16" class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          <span class="hidden sm:inline">Вручную</span>
+        </button>
+        <input type="file" id="csvImportInput" accept=".csv,text/csv" class="hidden">
+        <button id="btnImportCSV" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-1" title="Импорт CSV (синхронизация между iPhone и ПК)">
+          <svg width="16" height="16" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+          </svg>
+          <span class="hidden md:inline">Импорт</span>
+        </button>
+        <button id="btnExportCSV" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-1" title="Экспорт в CSV">
+          <svg width="16" height="16" class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span class="hidden md:inline">CSV</span>
+        </button>
+        <button id="btnResetData" class="px-2.5 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-xs font-medium text-red-400 border border-red-800/40 transition" title="Сбросить историю">
+          <svg width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- Top Alert / Device Info & Monthly Budget Bar -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0">
+          <svg width="20" height="20" class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-sm font-semibold text-white">Кроссплатформенный режим (iPhone & ПК) + Вставка из буфера (Ctrl+V)</h2>
+          <p class="text-xs text-slate-400">Загружай чеки из медиатеки iPhone, перетаскивай файлы мышью или нажимай <kbd class="px-1.5 py-0.5 bg-slate-950 border border-slate-700 rounded text-[10px] text-amber-300">Ctrl+V</kbd> / <kbd class="px-1.5 py-0.5 bg-slate-950 border border-slate-700 rounded text-[10px] text-amber-300">⌘+V</kbd>. Для переноса базы между устройствами используй Экспорт/Импорт CSV.</p>
+        </div>
+      </div>
+
+      <!-- Budget Limit Control -->
+      <div class="w-full lg:w-72 bg-slate-950/60 border border-slate-800 rounded-xl p-2.5 shrink-0">
+        <div class="flex items-center justify-between text-xs mb-1">
+          <span class="text-slate-400 font-medium">Месячный лимит трат:</span>
+          <div class="flex items-center space-x-1">
+            <input type="number" id="budgetLimitInput" value="50000" step="1000" class="w-20 bg-slate-900 border border-slate-700 rounded px-1.5 py-0.5 text-right text-xs font-bold text-white focus:outline-none focus:border-amber-400">
+            <span class="text-slate-400">₽</span>
+          </div>
+        </div>
+        <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+          <div id="budgetProgressBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 18%"></div>
+        </div>
+        <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+          <span id="budgetUsedLabel">Использовано: 0%</span>
+          <span id="budgetRemainingLabel">Остаток: 50 000 ₽</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload and Recognition Card -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+      <div class="flex flex-col lg:flex-row gap-6 items-stretch">
+
+        <!-- Drag & Drop Zone -->
+        <div class="flex-1 flex flex-col justify-between">
+          <div id="dropZone" class="border-2 border-dashed border-slate-700 hover:border-amber-400/60 rounded-xl p-6 text-center cursor-pointer transition-all bg-slate-950/40 hover:bg-slate-950/80 group">
+            <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
+            <div class="flex flex-col items-center justify-center space-y-3">
+              <div class="w-14 h-14 rounded-full bg-slate-800 group-hover:bg-amber-400/10 flex items-center justify-center transition border border-slate-700 group-hover:border-amber-400/30">
+                <svg width="28" height="28" class="w-7 h-7 text-slate-400 group-hover:text-amber-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-200">
+                  Перетащи скриншот(ы), вставь через <span class="text-emerald-400">Ctrl+V</span> или <span class="text-amber-400 underline decoration-amber-400/40 group-hover:decoration-amber-400">выбери с устройства</span>
+                </p>
+                <p class="text-xs text-slate-500 mt-1">Поддерживает одиночные чеки, пакетную загрузку нескольких скриншотов и вставку текста чека (PNG, JPG, WEBP)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Preview & Real OCR Progress -->
+          <div id="ocrPreviewContainer" class="hidden mt-3 bg-slate-950/80 border border-slate-800 rounded-xl p-3">
+            <div class="flex items-center gap-3">
+              <img id="imgPreviewThumb" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Превью чека" class="w-14 h-14 object-cover rounded-lg border border-slate-700 shrink-0 max-w-full h-auto">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <span id="ocrStatusText" class="font-medium text-amber-400 truncate">Анализ изображения...</span>
+                  <span id="ocrProgressPct" class="text-slate-400 font-mono">0%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div id="ocrProgressBar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 transition-all duration-200" style="width: 0%"></div>
+                </div>
+                <p id="ocrRawSnippet" class="text-[11px] text-slate-500 truncate mt-1">Ожидание текста чека...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Paste Parser & Quick Demo Buttons -->
+          <div class="mt-4 space-y-2.5">
+            <div class="flex items-center gap-2">
+              <input type="text" id="rawReceiptTextInput" placeholder="Или вставь текст СМС / уведомления от Т-Банка или Сбера сюда..." class="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 placeholder-slate-500">
+              <button id="btnParseRawText" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-amber-300 border border-slate-700 transition shrink-0">
+                Разобрать текст
+              </button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs text-slate-400 font-medium">Симуляция чеков (с генерацией макета):</span>
+              <button id="btnDemoTBank" class="px-2.5 py-1 rounded-md text-xs font-medium bg-[#FFDD2D]/10 hover:bg-[#FFDD2D]/20 text-[#FFDD2D] border border-[#FFDD2D]/30 transition flex items-center space-x-1">
+                <span class="w-2 h-2 rounded-full bg-[#FFDD2D]"></span>
+                <span>Чек Т-Банк (-1 840 ₽)</span>
+              </button>
+              <button id="btnDemoSber" class="px-2.5 py-1 rounded-md text-xs font-medium bg-[#21A038]/10 hover:bg-[#21A038]/20 text-emerald-400 border border-[#21A038]/30 transition flex items-center space-x-1">
+                <span class="w-2 h-2 rounded-full bg-[#21A038]"></span>
+                <span>Чек Сбербанк (-3 450 ₽)</span>
+              </button>
+              <button id="btnDemoIncome" class="px-2.5 py-1 rounded-md text-xs font-medium bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition flex items-center space-x-1">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <span>Перевод Т-Банк (+15 000 ₽)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recognition Result / Verification Preview Box -->
+        <div id="recognitionBox" class="w-full lg:w-96 bg-slate-950/60 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
+                <svg width="16" height="16" class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Карточка операции</span>
+              </h3>
+              <span id="detectedBankBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400">Ожидание файла</span>
+            </div>
+
+            <!-- Fields to review/edit before adding -->
+            <div class="mt-3 space-y-2.5 text-xs">
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-slate-400 mb-1">Сумма (₽)</label>
+                  <input type="number" step="0.01" id="recAmount" placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-semibold focus:outline-none focus:border-amber-400 text-sm">
+                </div>
+                <div>
+                  <label class="block text-slate-400 mb-1">Тип операции</label>
+                  <select id="recType" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-amber-400 text-xs">
+                    <option value="expense">Расход (-)</option>
+                    <option value="income">Доход (+)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-slate-400 mb-1">Получатель / Место / Описание</label>
+                <input type="text" id="recMerchant" placeholder="Например: ВкусВилл, Яндекс Такси" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-amber-400">
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-slate-400 mb-1">Банк</label>
+                  <select id="recBank" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-amber-400 text-xs">
+                    <option value="tbank">Т-Банк</option>
+                    <option value="sber">Сбербанк</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-slate-400 mb-1">Категория</label>
+                  <select id="recCategory" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-amber-400 text-xs">
+                    <option value="Супермаркеты">Супермаркеты</option>
+                    <option value="Кафе и рестораны">Кафе и рестораны</option>
+                    <option value="Транспорт">Транспорт</option>
+                    <option value="Здоровье и медицина">Здоровье и медицина</option>
+                    <option value="ИИ и подписки">ИИ и подписки</option>
+                    <option value="Развлечения и игры">Развлечения и игры</option>
+                    <option value="Переводы">Переводы</option>
+                    <option value="Другое">Другое</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-slate-400 mb-1">Дата операции</label>
+                <input type="date" id="recDate" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-amber-400 text-xs">
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center gap-2">
+            <button id="btnCancelEditMode" class="hidden px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition">
+              Отмена
+            </button>
+            <button id="btnSaveRecognized" class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center space-x-1.5">
+              <svg width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              <span id="btnSaveRecognizedText">Подтвердить и добавить в аналитику</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Summary Metrics Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Total Expenses -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Всего расходов</span>
+          <div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center">
+            <svg width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-2">
+          <div id="statTotalExpense" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">0 ₽</div>
+          <p id="statExpenseCount" class="text-[11px] text-slate-500 mt-0.5">0 операций • Ср. чек: 0 ₽</p>
+        </div>
+      </div>
+
+      <!-- Total Income -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Поступления / Доход</span>
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <svg width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-2">
+          <div id="statTotalIncome" class="text-xl sm:text-2xl font-extrabold text-emerald-400 tracking-tight">0 ₽</div>
+          <p id="statIncomeCount" class="text-[11px] text-slate-500 mt-0.5">0 операций</p>
+        </div>
+      </div>
+
+      <!-- T-Bank Share -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Т-Банк траты</span>
+          <div class="w-8 h-8 rounded-lg bg-[#FFDD2D]/10 text-[#FFDD2D] flex items-center justify-center font-bold text-xs">
+            Т
+          </div>
+        </div>
+        <div class="mt-2">
+          <div id="statTBankExpense" class="text-xl sm:text-2xl font-extrabold text-amber-300 tracking-tight">0 ₽</div>
+          <p id="statTBankShare" class="text-[11px] text-slate-500 mt-0.5">0% от общих расходов</p>
+        </div>
+      </div>
+
+      <!-- Sber Share -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Сбербанк траты</span>
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">
+            С
+          </div>
+        </div>
+        <div class="mt-2">
+          <div id="statSberExpense" class="text-xl sm:text-2xl font-extrabold text-emerald-400 tracking-tight">0 ₽</div>
+          <p id="statSberShare" class="text-[11px] text-slate-500 mt-0.5">0% от общих расходов</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Analytics & Insights Banner -->
+    <div class="bg-gradient-to-r from-emerald-950/40 via-slate-900 to-amber-950/30 border border-emerald-500/20 rounded-2xl p-5 shadow-xl">
+      <div class="flex items-start space-x-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shrink-0 shadow-md">
+          <svg width="20" height="20" class="w-5 h-5 text-slate-950 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+              <span>Инсайты финансового аналитика</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full bg-emerald-500/20 text-emerald-300 font-semibold uppercase">AI Рекомендации</span>
+            </h3>
+            <button id="btnRefreshInsights" class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center space-x-1">
+              <svg width="14" height="14" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>Обновить</span>
+            </button>
+          </div>
+          <div id="aiInsightsList" class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <!-- Dynamic AI Cards will be injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section (3 Tabs/Charts) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Category Doughnut Chart -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <h3 class="text-sm font-bold text-slate-200">Расходы по категориям</h3>
+          <span class="text-xs text-slate-500">Структура</span>
+        </div>
+        <div class="relative h-64 w-full mt-4 flex items-center justify-center">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Bank Comparison Chart -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <h3 class="text-sm font-bold text-slate-200">Т-Банк vs Сбербанк</h3>
+          <span class="text-xs text-slate-500">По категориям</span>
+        </div>
+        <div class="relative h-64 w-full mt-4 flex items-center justify-center">
+          <canvas id="bankComparisonChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Daily Trend Line Chart -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <h3 class="text-sm font-bold text-slate-200">Динамика расходов по дням</h3>
+          <span class="text-xs text-slate-500">Тренд трат</span>
+        </div>
+        <div class="relative h-64 w-full mt-4 flex items-center justify-center">
+          <canvas id="dailyTrendChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transactions List & Filters -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+        <div>
+          <h3 class="text-base font-bold text-white">История операций</h3>
+          <p id="filteredSummaryText" class="text-xs text-slate-400">Все добавленные чеки и переводы</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          <select id="filterType" class="bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="all">Все операции</option>
+            <option value="expense">Только расходы (-)</option>
+            <option value="income">Только доходы (+)</option>
+          </select>
+          <select id="filterBank" class="bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="all">Все банки</option>
+            <option value="tbank">Т-Банк</option>
+            <option value="sber">Сбербанк</option>
+          </select>
+          <select id="filterCategory" class="bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="all">Все категории</option>
+            <option value="Супермаркеты">Супермаркеты</option>
+            <option value="Кафе и рестораны">Кафе и рестораны</option>
+            <option value="Транспорт">Транспорт</option>
+            <option value="Здоровье и медицина">Здоровье и медицина</option>
+            <option value="ИИ и подписки">ИИ и подписки</option>
+            <option value="Развлечения и игры">Развлечения и игры</option>
+            <option value="Переводы">Переводы</option>
+            <option value="Другое">Другое</option>
+          </select>
+          <input type="text" id="filterSearch" placeholder="Поиск мерчанта..." class="bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 placeholder-slate-500">
+        </div>
+      </div>
+
+      <!-- Transactions Table -->
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left text-xs">
+          <thead class="text-[11px] uppercase tracking-wider text-slate-400 bg-slate-950/60 border-b border-slate-800">
+            <tr>
+              <th class="py-3 px-3">Дата</th>
+              <th class="py-3 px-3">Банк</th>
+              <th class="py-3 px-3">Описание / Место</th>
+              <th class="py-3 px-3">Категория</th>
+              <th class="py-3 px-3 text-right">Сумма</th>
+              <th class="py-3 px-3 text-center">Действие</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsTableBody" class="divide-y divide-slate-800/60">
+            <!-- Dynamic rows will be rendered here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="hidden py-12 text-center text-slate-500">
+        <svg width="48" height="48" class="w-12 h-12 mx-auto text-slate-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+        </svg>
+        <p class="text-sm font-medium">Нет операций по выбранным фильтрам</p>
+        <p class="text-xs text-slate-600 mt-1">Загрузи скриншот или сбрось параметры поиска</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal: Manual Transaction Entry -->
+  <div id="manualModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-base font-bold text-white">Добавить операцию вручную</h3>
+        <button id="btnCloseManualModal" class="text-slate-400 hover:text-white">
+          <svg width="20" height="20" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-400 mb-1">Сумма (₽)</label>
+          <input type="number" step="0.01" id="manAmount" placeholder="1000.00" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold text-sm focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-400 mb-1">Тип</label>
+            <select id="manType" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+              <option value="expense">Расход (-)</option>
+              <option value="income">Доход (+)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Банк</label>
+            <select id="manBank" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+              <option value="tbank">Т-Банк</option>
+              <option value="sber">Сбербанк</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">Получатель / Магазин</label>
+          <input type="text" id="manMerchant" placeholder="Например: Пятерочка, Метро, Аптека" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-400 mb-1">Категория</label>
+            <select id="manCategory" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+              <option value="Супермаркеты">Супермаркеты</option>
+              <option value="Кафе и рестораны">Кафе и рестораны</option>
+              <option value="Транспорт">Транспорт</option>
+              <option value="Здоровье и медицина">Здоровье и медицина</option>
+              <option value="ИИ и подписки">ИИ и подписки</option>
+              <option value="Развлечения и игры">Развлечения и игры</option>
+              <option value="Переводы">Переводы</option>
+              <option value="Другое">Другое</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Дата</label>
+            <input type="date" id="manDate" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 flex justify-end space-x-2">
+        <button id="btnCancelManual" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300">Отмена</button>
+        <button id="btnSubmitManual" class="px-4 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Reset Confirmation Modal -->
+  <div id="resetConfirmModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4">
+      <div class="flex items-center space-x-3 text-amber-400">
+        <svg width="24" height="24" class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <h3 class="text-sm font-bold text-white">Сброс данных</h3>
+      </div>
+      <p class="text-xs text-slate-400">Вернуть список операций к начальным демонстрационным записям? Текущие добавленные операции будут сброшены.</p>
+      <div class="flex justify-end space-x-2 pt-2 border-t border-slate-800">
+        <button id="btnCancelReset" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300">Отмена</button>
+        <button id="btnConfirmReset" class="px-3.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs">Да, сбросить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- In-Page Toast Notification Container -->
+  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- Footer -->
+  <footer class="mt-auto border-t border-slate-800 bg-slate-950/80 py-4 text-center text-xs text-slate-500">
+    <p>FinAnalytics AI • Персональный финансовый аналитик с распознаванием чеков Т-Банк и Сбербанк • Доступно на iPhone и ПК</p>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    (function () {
+      // 1. Initial State & Starter Transactions
+      const INITIAL_DATA = [
+        { id: '1', date: '2026-10-14', bank: 'tbank', merchant: 'ВкусВилл', category: 'Супермаркеты', amount: 1420.50, type: 'expense' },
+        { id: '2', date: '2026-10-13', bank: 'sber', merchant: 'Аптека Столички', category: 'Здоровье и медицина', amount: 890.00, type: 'expense' },
+        { id: '3', date: '2026-10-12', bank: 'tbank', merchant: 'DDX Fitness', category: 'Здоровье и медицина', amount: 2300.00, type: 'expense' },
+        { id: '4', date: '2026-10-11', bank: 'sber', merchant: 'Перевод от Клиента', category: 'Переводы', amount: 35000.00, type: 'income' },
+        { id: '5', date: '2026-10-10', bank: 'tbank', merchant: 'Яндекс Go Такси', category: 'Транспорт', amount: 650.00, type: 'expense' },
+        { id: '6', date: '2026-10-09', bank: 'sber', merchant: 'Кофейня Дринкит', category: 'Кафе и рестораны', amount: 380.00, type: 'expense' },
+        { id: '7', date: '2026-10-08', bank: 'tbank', merchant: 'Steam Games', category: 'Развлечения и игры', amount: 1250.00, type: 'expense' },
+        { id: '8', date: '2026-10-06', bank: 'tbank', merchant: 'OpenAI API Sub', category: 'ИИ и подписки', amount: 1950.00, type: 'expense' }
+      ];
+
+      let transactions = [];
+      let monthlyBudget = 50000;
+
+      try {
+        const stored = localStorage.getItem('fin_analytics_transactions');
+        transactions = stored ? JSON.parse(stored) : [...INITIAL_DATA];
+        const storedBudget = localStorage.getItem('fin_analytics_budget');
+        if (storedBudget && !isNaN(parseFloat(storedBudget))) {
+          monthlyBudget = parseFloat(storedBudget);
+          document.getElementById('budgetLimitInput').value = monthlyBudget;
+        }
+      } catch (e) {
+        console.warn('LocalStorage error:', e);
+        transactions = [...INITIAL_DATA];
+      }
+
+      function saveTransactions() {
+        try {
+          localStorage.setItem('fin_analytics_transactions', JSON.stringify(transactions));
+          localStorage.setItem('fin_analytics_budget', String(monthlyBudget));
+        } catch (e) {
+          console.warn('LocalStorage save error:', e);
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // Toast function
+      function showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl text-xs font-semibold shadow-2xl border transition-all duration-300 transform translate-y-2 opacity-0 flex items-center space-x-2 ${
+          type === 'success' 
+            ? 'bg-emerald-950/90 text-emerald-300 border-emerald-500/40' 
+            : type === 'warning' 
+              ? 'bg-amber-950/90 text-amber-300 border-amber-500/40' 
+              : 'bg-slate-900 text-slate-200 border-slate-700'
+        }`;
+        const span = document.createElement('span');
+        span.textContent = message;
+        toast.appendChild(span);
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.remove('translate-y-2', 'opacity-0');
+        }, 10);
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-2');
+          setTimeout(() => toast.remove(), 300);
+        }, 3200);
+      }
+
+      // Chart Instances
+      let categoryChartInstance = null;
+      let bankComparisonChartInstance = null;
+      let dailyTrendChartInstance = null;
+
+      // Exact currency formatting preserving kopeks when non-integer
+      function formatRub(val) {
+        const num = Number(val) || 0;
+        const hasKopeks = Math.abs(num % 1) > 0.001;
+        return new Intl.NumberFormat('ru-RU', {
+          style: 'currency',
+          currency: 'RUB',
+          minimumFractionDigits: hasKopeks ? 2 : 0,
+          maximumFractionDigits: 2
+        }).format(num);
+      }
+
+      // 2. Render Functions
+      function updateStats() {
+        const expenses = transactions.filter(t => t.type === 'expense');
+        const incomes = transactions.filter(t => t.type === 'income');
+
+        const totalExpense = expenses.reduce((acc, t) => acc + Number(t.amount || 0), 0);
+        const totalIncome = incomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
+        const avgExpense = expenses.length > 0 ? totalExpense / expenses.length : 0;
+
+        const tbankExp = expenses.filter(t => t.bank === 'tbank').reduce((acc, t) => acc + Number(t.amount || 0), 0);
+        const sberExp = expenses.filter(t => t.bank === 'sber').reduce((acc, t) => acc + Number(t.amount || 0), 0);
+
+        document.getElementById('statTotalExpense').textContent = formatRub(totalExpense);
+        document.getElementById('statExpenseCount').textContent = `${expenses.length} опер. • Ср. чек: ${formatRub(avgExpense)}`;
+
+        document.getElementById('statTotalIncome').textContent = formatRub(totalIncome);
+        document.getElementById('statIncomeCount').textContent = `${incomes.length} поступлений`;
+
+        document.getElementById('statTBankExpense').textContent = formatRub(tbankExp);
+        const tShare = totalExpense > 0 ? Math.round((tbankExp / totalExpense) * 100) : 0;
+        document.getElementById('statTBankShare').textContent = `${tShare}% от всех трат`;
+
+        document.getElementById('statSberExpense').textContent = formatRub(sberExp);
+        const sShare = totalExpense > 0 ? Math.round((sberExp / totalExpense) * 100) : 0;
+        document.getElementById('statSberShare').textContent = `${sShare}% от всех трат`;
+
+        // Update Monthly Budget Bar
+        const budgetPct = monthlyBudget > 0 ? Math.min(100, Math.round((totalExpense / monthlyBudget) * 100)) : 0;
+        const budgetBar = document.getElementById('budgetProgressBar');
+        budgetBar.style.width = `${budgetPct}%`;
+        budgetBar.className = `h-full transition-all duration-300 ${
+          budgetPct >= 90 ? 'bg-red-500' : budgetPct >= 70 ? 'bg-amber-400' : 'bg-emerald-500'
+        }`;
+        document.getElementById('budgetUsedLabel').textContent = `Использовано: ${budgetPct}% (${formatRub(totalExpense)})`;
+        const remaining = monthlyBudget - totalExpense;
+        document.getElementById('budgetRemainingLabel').textContent = remaining >= 0
+          ? `Остаток: ${formatRub(remaining)}`
+          : `Перерасход: ${formatRub(Math.abs(remaining))}`;
+
+        renderAIInsights(totalExpense, totalIncome, expenses, tbankExp, sberExp);
+      }
+
+      function renderAIInsights(totalExp, totalInc, expenses, tbankExp, sberExp) {
+        const list = document.getElementById('aiInsightsList');
+        list.innerHTML = '';
+
+        const catTotals = {};
+        expenses.forEach(e => {
+          catTotals[e.category] = (catTotals[e.category] || 0) + Number(e.amount);
+        });
+
+        let topCat = 'Нет расходов';
+        let maxVal = 0;
+        for (const c in catTotals) {
+          if (catTotals[c] > maxVal) {
+            maxVal = catTotals[c];
+            topCat = c;
+          }
+        }
+        const topCatPercent = totalExp > 0 ? Math.round((maxVal / totalExp) * 100) : 0;
+
+        // Insight 1: Main Expense Category
+        const card1 = document.createElement('div');
+        card1.className = 'bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex flex-col justify-between';
+        card1.innerHTML = `
+          <div>
+            <span class="text-[10px] font-bold text-amber-400 uppercase">Основная статья</span>
+            <p class="font-semibold text-white mt-0.5">${escapeHtml(topCat)} (${topCatPercent}%)</p>
+            <p class="text-[11px] text-slate-400 mt-1">Траты в категории составили ${formatRub(maxVal)}. В Т-Банке выгодно подключить эту категорию в повышенный кэшбэк (5–15%).</p>
+          </div>
+        `;
+        list.appendChild(card1);
+
+        // Insight 2: Balance & Savings Rate
+        const card2 = document.createElement('div');
+        card2.className = 'bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex flex-col justify-between';
+        const netFlow = totalInc - totalExp;
+        const savingsRate = totalInc > 0 ? Math.round((netFlow / totalInc) * 100) : 0;
+        const netColor = netFlow >= 0 ? 'text-emerald-400' : 'text-red-400';
+        card2.innerHTML = `
+          <div>
+            <span class="text-[10px] font-bold text-cyan-400 uppercase">Чистый поток & Сбережения</span>
+            <p class="font-semibold ${netColor} mt-0.5">${netFlow >= 0 ? '+' : ''}${formatRub(netFlow)} ${totalInc > 0 ? `(Норма: ${savingsRate}%)` : ''}</p>
+            <p class="text-[11px] text-slate-400 mt-1">${netFlow >= 0 ? 'Положительный баланс. Свободный остаток можно разместить на накопительном счете под ежедневный процент.' : 'Расходы превышают поступления за выбранный период. Проверь необязательные подписки.'}</p>
+          </div>
+        `;
+        list.appendChild(card2);
+
+        // Insight 3: Bank Split recommendation
+        const card3 = document.createElement('div');
+        card3.className = 'bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex flex-col justify-between';
+        const leadBank = tbankExp >= sberExp ? 'Т-Банка' : 'Сбербанка';
+        const maxTx = expenses.reduce((max, t) => Number(t.amount) > max ? Number(t.amount) : max, 0);
+        card3.innerHTML = `
+          <div>
+            <span class="text-[10px] font-bold text-emerald-400 uppercase">Сплит по картам</span>
+            <p class="font-semibold text-white mt-0.5">Лидер трат: карта ${leadBank}</p>
+            <p class="text-[11px] text-slate-400 mt-1">Макс. покупка: ${formatRub(maxTx)}. Сбер оптимален для переводов и аптек со СберСпасибо, Т-Банк — для супермаркетов и подписок.</p>
+          </div>
+        `;
+        list.appendChild(card3);
+      }
+
+      function drawFallbackCanvasChart(canvasId, items, colors) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const w = canvas.parentElement ? canvas.parentElement.clientWidth || 300 : 300;
+        const h = 220;
+        canvas.width = w;
+        canvas.height = h;
+        ctx.clearRect(0, 0, w, h);
+        const total = items.reduce((s, x) => s + x.val, 0) || 1;
+        let y = 16;
+        items.slice(0, 6).forEach((it, idx) => {
+          const pct = Math.round((it.val / total) * 100);
+          const barW = Math.max(4, Math.round(((w - 130) * it.val) / total));
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '11px sans-serif';
+          ctx.fillText(it.label.slice(0, 14), 8, y + 11);
+          ctx.fillStyle = colors[idx % colors.length] || '#10b981';
+          ctx.fillRect(105, y, barW, 13);
+          ctx.fillStyle = '#f8fafc';
+          ctx.fillText(pct + '%', 112 + barW, y + 11);
+          y += 30;
+        });
+      }
+
+      function updateCharts() {
+        const expenses = transactions.filter(t => t.type === 'expense');
+        const categories = ['Супермаркеты', 'Кафе и рестораны', 'Транспорт', 'Здоровье и медицина', 'ИИ и подписки', 'Развлечения и игры', 'Переводы', 'Другое'];
+        const catColors = ['#10B981', '#F59E0B', '#3B82F6', '#EC4899', '#8B5CF6', '#F97316', '#64748B', '#06B6D4'];
+
+        const catData = categories.map(cat => {
+          return expenses.filter(t => t.category === cat).reduce((sum, t) => sum + Number(t.amount || 0), 0);
+        });
+
+        if (typeof window.Chart === 'undefined') {
+          const items = categories.map((c, i) => ({ label: c, val: catData[i] })).filter(x => x.val > 0);
+          drawFallbackCanvasChart('categoryChart', items, catColors);
+          drawFallbackCanvasChart('bankComparisonChart', [
+            { label: 'Т-Банк', val: expenses.filter(t => t.bank === 'tbank').reduce((s, t) => s + Number(t.amount || 0), 0) },
+            { label: 'Сбербанк', val: expenses.filter(t => t.bank === 'sber').reduce((s, t) => s + Number(t.amount || 0), 0) }
+          ], ['#FFDD2D', '#21A038']);
+          drawFallbackCanvasChart('dailyTrendChart', items, ['#38bdf8']);
+          return;
+        }
+        // 1. Category Doughnut Chart
+        if (categoryChartInstance) categoryChartInstance.destroy();
+        const ctx1 = document.getElementById('categoryChart').getContext('2d');
+        categoryChartInstance = new Chart(ctx1, {
+          type: 'doughnut',
+          data: {
+            labels: categories,
+            datasets: [{
+              data: catData,
+              backgroundColor: catColors,
+              borderColor: '#0f172a',
+              borderWidth: 2,
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: {
+                  boxWidth: 10,
+                  font: { family: 'Inter', size: 10 },
+                  color: '#94a3b8'
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return ` ${context.label}: ${formatRub(context.parsed)}`;
+                  }
+                }
+              }
+            },
+            cutout: '66%'
+          }
+        });
+
+        // 2. Bank Comparison Chart
+        const tbankByCat = categories.map(cat => {
+          return expenses.filter(t => t.bank === 'tbank' && t.category === cat).reduce((sum, t) => sum + Number(t.amount || 0), 0);
+        });
+        const sberByCat = categories.map(cat => {
+          return expenses.filter(t => t.bank === 'sber' && t.category === cat).reduce((sum, t) => sum + Number(t.amount || 0), 0);
+        });
+
+        if (bankComparisonChartInstance) bankComparisonChartInstance.destroy();
+        const ctx2 = document.getElementById('bankComparisonChart').getContext('2d');
+        bankComparisonChartInstance = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: categories.map(c => c.length > 9 ? c.slice(0, 8) + '…' : c),
+            datasets: [
+              {
+                label: 'Т-Банк',
+                data: tbankByCat,
+                backgroundColor: '#FFDD2D',
+                borderRadius: 4
+              },
+              {
+                label: 'Сбербанк',
+                data: sberByCat,
+                backgroundColor: '#21A038',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { color: '#64748b', font: { size: 9 } }
+              },
+              y: {
+                grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                ticks: {
+                  color: '#64748b',
+                  font: { size: 9 },
+                  callback: function (val) {
+                    return val >= 1000 ? (val / 1000) + 'k' : val;
+                  }
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  boxWidth: 10,
+                  font: { family: 'Inter', size: 10 },
+                  color: '#94a3b8'
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return ` ${context.dataset.label}: ${formatRub(context.parsed.y)}`;
+                  }
+                }
+              }
+            }
+          }
+        });
+
+        // 3. Daily Trend Line Chart
+        const dailyMap = {};
+        expenses.forEach(e => {
+          dailyMap[e.date] = (dailyMap[e.date] || 0) + Number(e.amount || 0);
+        });
+        const sortedDates = Object.keys(dailyMap).sort((a, b) => new Date(a) - new Date(b));
+        const dailyValues = sortedDates.map(d => dailyMap[d]);
+
+        if (dailyTrendChartInstance) dailyTrendChartInstance.destroy();
+        const ctx3 = document.getElementById('dailyTrendChart').getContext('2d');
+        dailyTrendChartInstance = new Chart(ctx3, {
+          type: 'line',
+          data: {
+            labels: sortedDates.map(d => d.slice(5)),
+            datasets: [{
+              label: 'Расходы за день',
+              data: dailyValues,
+              borderColor: '#38bdf8',
+              backgroundColor: 'rgba(56, 189, 248, 0.15)',
+              fill: true,
+              tension: 0.35,
+              pointRadius: 3.5,
+              pointBackgroundColor: '#38bdf8'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { color: '#64748b', font: { size: 9 } }
+              },
+              y: {
+                grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                ticks: {
+                  color: '#64748b',
+                  font: { size: 9 },
+                  callback: function (val) {
+                    return val >= 1000 ? (val / 1000) + 'k' : val;
+                  }
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  boxWidth: 10,
+                  font: { family: 'Inter', size: 10 },
+                  color: '#94a3b8'
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return ` Траты: ${formatRub(context.parsed.y)}`;
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      function renderTable() {
+        const tbody = document.getElementById('transactionsTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const filterType = document.getElementById('filterType').value;
+        const filterBank = document.getElementById('filterBank').value;
+        const filterCategory = document.getElementById('filterCategory').value;
+        const filterSearch = document.getElementById('filterSearch').value.toLowerCase().trim();
+
+        const filtered = transactions.filter(t => {
+          if (filterType !== 'all' && t.type !== filterType) return false;
+          if (filterBank !== 'all' && t.bank !== filterBank) return false;
+          if (filterCategory !== 'all' && t.category !== filterCategory) return false;
+          if (filterSearch && !String(t.merchant).toLowerCase().includes(filterSearch)) return false;
+          return true;
+        });
+
+        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const filteredSum = filtered.reduce((acc, t) => acc + (t.type === 'expense' ? -Number(t.amount) : Number(t.amount)), 0);
+        document.getElementById('filteredSummaryText').textContent =
+          `Показано записей: ${filtered.length} из ${transactions.length} • Сальдо выборки: ${filteredSum >= 0 ? '+' : ''}${formatRub(filteredSum)}`;
+
+        tbody.innerHTML = '';
+        if (filtered.length === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+          filtered.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-800/40 transition group';
+
+            const bankBadge = item.bank === 'tbank'
+              ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-[#FFDD2D]/10 text-[#FFDD2D] border border-[#FFDD2D]/20">Т-Банк</span>`
+              : `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-[#21A038]/10 text-emerald-400 border border-[#21A038]/20">Сбер</span>`;
+
+            const amountClass = item.type === 'income' ? 'text-emerald-400 font-bold' : 'text-slate-100 font-semibold';
+            const amountPrefix = item.type === 'income' ? '+' : '-';
+
+            tr.innerHTML = `
+              <td class="py-3 px-3 text-slate-400 whitespace-nowrap">${escapeHtml(item.date)}</td>
+              <td class="py-3 px-3 whitespace-nowrap">${bankBadge}</td>
+              <td class="py-3 px-3 font-medium text-slate-200">${escapeHtml(item.merchant)}</td>
+              <td class="py-3 px-3">
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-slate-800 text-slate-300 border border-slate-700">${escapeHtml(item.category)}</span>
+              </td>
+              <td class="py-3 px-3 text-right whitespace-nowrap ${amountClass}">${amountPrefix}${formatRub(item.amount)}</td>
+              <td class="py-3 px-3 text-center whitespace-nowrap">
+                <button data-id="${escapeHtml(item.id)}" class="btnEditRow text-slate-500 hover:text-amber-400 transition p-1 rounded mr-1" title="Редактировать операцию">
+                  <svg width="16" height="16" class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                </button>
+                <button data-id="${escapeHtml(item.id)}" class="btnDeleteRow text-slate-500 hover:text-red-400 transition p-1 rounded" title="Удалить операцию">
+                  <svg width="16" height="16" class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      }
+
+      function refreshAll() {
+        updateStats();
+        updateCharts();
+        renderTable();
+        saveTransactions();
+      }
+
+      // 3. Banking Screenshot Parser, Visual Color Detector & Real OCR
+      let editingTxId = null;
+
+      function setEditModeUI(isEditing) {
+        const cancelBtn = document.getElementById('btnCancelEditMode');
+        const saveText = document.getElementById('btnSaveRecognizedText');
+        if (isEditing) {
+          cancelBtn.classList.remove('hidden');
+          saveText.textContent = 'Сохранить изменения';
+        } else {
+          editingTxId = null;
+          cancelBtn.classList.add('hidden');
+          saveText.textContent = 'Подтвердить и добавить в аналитику';
+        }
+      }
+
+      function detectBankByImageColors(imgElement) {
+        try {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = 120;
+          canvas.height = 120;
+          ctx.drawImage(imgElement, 0, 0, 120, 120);
+          const data = ctx.getImageData(0, 0, 120, 120).data;
+          let yellowPixels = 0;
+          let greenPixels = 0;
+
+          for (let i = 0; i < data.length; i += 4) {
+            const r = data[i], g = data[i + 1], b = data[i + 2];
+            if (r > 210 && g > 175 && b < 90) yellowPixels++;
+            if (g > 130 && g > r * 1.25 && g > b * 1.2) greenPixels++;
+          }
+          if (greenPixels > yellowPixels && greenPixels > 15) return 'sber';
+          if (yellowPixels > greenPixels && yellowPixels > 15) return 'tbank';
+        } catch (err) {
+          console.warn('Color analysis skipped:', err);
+        }
+        return null;
+      }
+
+      function parseScreenshotData(text, fileName = '', colorBankHint = null) {
+        const combined = (text + ' ' + fileName);
+        const lower = combined.toLowerCase();
+
+        // 1. Detect Bank
+        let detectedBank = colorBankHint || 'tbank';
+        if (lower.includes('сбер') || lower.includes('sber') || lower.includes('сбербанк') || lower.includes('сберспасибо') || lower.includes('пао сбербанк')) {
+          detectedBank = 'sber';
+        } else if (lower.includes('тинькофф') || lower.includes('tinkoff') || lower.includes('т-банк') || lower.includes('t-bank') || lower.includes('тбанк') || lower.includes('т банк')) {
+          detectedBank = 'tbank';
+        }
+
+        // 2. Detect Operation Type
+        let type = 'expense';
+        if (lower.includes('пополнение') || lower.includes('перевод вам') || lower.includes('зачисление') || lower.includes('входящий перевод') || /(?:^|\s)\+\s*\d/.test(text)) {
+          type = 'income';
+        }
+
+        // 3. Extract Amount
+        let amount = 0;
+        const patterns = [
+          /[-+−–]?\s*(\d{1,3}(?:[\s\u00A0]\d{3})*(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)\s*(?:₽|руб\.?|rur|rub)/i,
+          /(?:сумма|итого|всего|перевод|покупка|списание)[\s:]*[-+−–]?\s*(\d{1,3}(?:[\s\u00A0]\d{3})*(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)/i,
+          /[-+−–]\s*(\d{1,3}(?:[\s\u00A0]\d{3})+(?:[.,]\d{1,2})?|\d{2,6}(?:[.,]\d{2}))/
+        ];
+        for (const regex of patterns) {
+          const m = text.match(regex);
+          if (m && m[1]) {
+            const cleaned = m[1].replace(/[\s\u00A0]+/g, '').replace(',', '.');
+            const parsedVal = parseFloat(cleaned);
+            if (!isNaN(parsedVal) && parsedVal > 0 && parsedVal < 10000000) {
+              amount = parsedVal;
+              break;
+            }
+          }
+        }
+
+        // 4. Extract Date (properly escaped regex for DD.MM.YYYY and Russian month names)
+        let extractedDate = new Date().toISOString().split('T')[0];
+        const dmyMatch = text.match(/(\d{2})[./-](\d{2})[./-](20\d{2})/);
+        if (dmyMatch) {
+          extractedDate = `${dmyMatch[3]}-${dmyMatch[2]}-${dmyMatch[1]}`;
+        } else {
+          const monthPatterns = [
+            { rx: /(\d{1,2})\s+январ[яь]\s*(20\d{2})?/i, m: '01' },
+            { rx: /(\d{1,2})\s+феврал[яь]\s*(20\d{2})?/i, m: '02' },
+            { rx: /(\d{1,2})\s+март[а]?\s*(20\d{2})?/i, m: '03' },
+            { rx: /(\d{1,2})\s+апрел[яь]\s*(20\d{2})?/i, m: '04' },
+            { rx: /(\d{1,2})\s+ма[яй]\s*(20\d{2})?/i, m: '05' },
+            { rx: /(\d{1,2})\s+июн[яь]\s*(20\d{2})?/i, m: '06' },
+            { rx: /(\d{1,2})\s+июл[яь]\s*(20\d{2})?/i, m: '07' },
+            { rx: /(\d{1,2})\s+август[а]?\s*(20\d{2})?/i, m: '08' },
+            { rx: /(\d{1,2})\s+сентябр[яь]\s*(20\d{2})?/i, m: '09' },
+            { rx: /(\d{1,2})\s+октябр[яь]\s*(20\d{2})?/i, m: '10' },
+            { rx: /(\d{1,2})\s+ноябр[яь]\s*(20\d{2})?/i, m: '11' },
+            { rx: /(\d{1,2})\s+декабр[яь]\s*(20\d{2})?/i, m: '12' }
+          ];
+          for (const item of monthPatterns) {
+            const mMatch = lower.match(item.rx);
+            if (mMatch) {
+              const day = mMatch[1].padStart(2, '0');
+              const year = mMatch[2] || new Date().getFullYear();
+              extractedDate = `${year}-${item.m}-${day}`;
+              break;
+            }
+          }
+        }
+
+        // 5. Extract Merchant & Category
+        let merchant = 'Операция по карте';
+        let category = 'Другое';
+
+        const rules = [
+          { keys: ['вкусвилл', 'vkusvill'], merchant: 'ВкусВилл', category: 'Супермаркеты' },
+          { keys: ['пятерочка', 'пятёрочка', '5ka'], merchant: 'Пятёрочка', category: 'Супермаркеты' },
+          { keys: ['перекресток', 'перекрёсток', 'perekrestok'], merchant: 'Перекрёсток', category: 'Супермаркеты' },
+          { keys: ['магнит', 'magnit', 'дикси', 'лента', 'ашан', 'самокат', 'лавка', 'озон', 'ozon', 'wildberries'], merchant: 'Супермаркет / Маркетплейс', category: 'Супермаркеты' },
+          { keys: ['яндекс такси', 'yandex go', 'яндекс go', 'uber', 'ситимобил'], merchant: 'Яндекс Go Такси', category: 'Транспорт' },
+          { keys: ['метро', 'тройка', 'mosmetro', 'мцд', 'цппк', 'аэроэкспресс'], merchant: 'Московский транспорт', category: 'Транспорт' },
+          { keys: ['whoosh', 'вуш', 'юрент', 'делимобиль', 'delimobil'], merchant: 'Кикшеринг / Каршеринг', category: 'Транспорт' },
+          { keys: ['ddx', 'фитнес', 'fitness', 'спортмастер'], merchant: 'DDX Fitness / Спорт', category: 'Здоровье и медицина' },
+          { keys: ['аптека', 'столички', 'ригла', 'еаптека', 'горздрав', 'инвитро', 'гемотест', 'клиника'], merchant: 'Аптека / Медицина', category: 'Здоровье и медицина' },
+          { keys: ['steam', 'dota', 'playstation', 'xbox', 'plati'], merchant: 'Steam / Игры', category: 'Развлечения и игры' },
+          { keys: ['openai', 'chatgpt', 'claude', 'anthropic', 'cursor', 'copilot', 'vercel', 'spaceweb', 'ollama'], merchant: 'AI и Облачные сервисы', category: 'ИИ и подписки' },
+          { keys: ['дринкит', 'drinkit', 'старбакс', 'stars coffee', 'шоколадница', 'додо', 'вкусно и точка', 'бургер кинг', 'ростикс', 'кофе', 'ресторан', 'кафе'], merchant: 'Кафе / Ресторан', category: 'Кафе и рестораны' },
+          { keys: ['сбп', 'перевод', 'клиенту сбера', 'по номеру телефона'], merchant: 'Перевод по СБП', category: 'Переводы' }
+        ];
+
+        for (const r of rules) {
+          if (r.keys.some(k => lower.includes(k))) {
+            merchant = r.merchant;
+            category = r.category;
+            break;
+          }
+        }
+
+        return {
+          bank: detectedBank,
+          type: type,
+          amount: amount,
+          merchant: merchant,
+          category: category,
+          date: extractedDate
+        };
+      }
+
+      function populateRecognitionForm(data) {
+        document.getElementById('recAmount').value = data.amount || '';
+        document.getElementById('recType').value = data.type;
+        document.getElementById('recMerchant').value = data.merchant;
+        document.getElementById('recBank').value = data.bank;
+        document.getElementById('recCategory').value = data.category;
+        document.getElementById('recDate').value = data.date;
+
+        const badge = document.getElementById('detectedBankBadge');
+        if (editingTxId) {
+          badge.textContent = 'Режим редактирования';
+          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40';
+        } else if (data.bank === 'tbank') {
+          badge.textContent = 'Т-Банк определен';
+          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-[#FFDD2D]/20 text-[#FFDD2D] border border-[#FFDD2D]/40';
+        } else {
+          badge.textContent = 'Сбербанк определен';
+          badge.className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-[#21A038]/20 text-emerald-400 border border-[#21A038]/40';
+        }
+      }
+
+      // Generate visual synthetic receipt on Canvas for Demo buttons
+      function generateDemoReceiptDataUrl(bank, title, amountText, merchantText, dateText) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 320;
+        canvas.height = 200;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, 320, 200);
+
+        // Header bar with signature bank color
+        ctx.fillStyle = bank === 'tbank' ? '#FFDD2D' : '#21A038';
+        ctx.fillRect(0, 0, 320, 42);
+
+        ctx.fillStyle = bank === 'tbank' ? '#111827' : '#ffffff';
+        ctx.font = 'bold 15px Inter, sans-serif';
+        ctx.fillText(title, 16, 26);
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 24px Inter, sans-serif';
+        ctx.fillText(amountText, 16, 85);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '13px Inter, sans-serif';
+        ctx.fillText(merchantText, 16, 120);
+        ctx.fillText('Дата: ' + dateText, 16, 148);
+        ctx.fillText('Статус: Исполнено', 16, 174);
+
+        return canvas.toDataURL('image/png');
+      }
+
+      // Handle Image Upload with Real OCR + Timeout Protection + Color Analysis
+      function handleImageFile(file) {
+        if (!file || (!file.type.startsWith('image/') && !file.name.match(/\.(png|jpe?g|heic|webp)$/i))) {
+          showToast('Пожалуйста, выберите файл изображения (PNG, JPG, WEBP)', 'warning');
+          return;
+        }
+
+        setEditModeUI(false);
+
+        const previewContainer = document.getElementById('ocrPreviewContainer');
+        const imgThumb = document.getElementById('imgPreviewThumb');
+        const statusText = document.getElementById('ocrStatusText');
+        const progressPct = document.getElementById('ocrProgressPct');
+        const progressBar = document.getElementById('ocrProgressBar');
+        const rawSnippet = document.getElementById('ocrRawSnippet');
+
+        previewContainer.classList.remove('hidden');
+        statusText.textContent = 'Чтение изображения и цветовой палитры...';
+        progressPct.textContent = '15%';
+        progressBar.style.width = '15%';
+        rawSnippet.textContent = `Файл: ${file.name}`;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const dataUrl = e.target.result;
+          imgThumb.src = dataUrl;
+
+          const tempImg = new Image();
+          tempImg.onload = async function () {
+            const colorHint = detectBankByImageColors(tempImg);
+
+            if (window.Tesseract) {
+              try {
+                statusText.textContent = 'Оптическое распознавание чека (OCR)...';
+                const ocrPromise = window.Tesseract.recognize(dataUrl, 'rus+eng', {
+                  logger: m => {
+                    if (m.status === 'recognizing text' && typeof m.progress === 'number') {
+                      const pct = Math.max(20, Math.round(m.progress * 100));
+                      progressPct.textContent = pct + '%';
+                      progressBar.style.width = pct + '%';
+                    }
+                  }
+                });
+                const timeoutPromise = new Promise((_, reject) =>
+                  setTimeout(() => reject(new Error('OCR_TIMEOUT')), 8000)
+                );
+
+                const result = await Promise.race([ocrPromise, timeoutPromise]);
+                const recognizedText = (result && result.data && result.data.text) ? result.data.text : '';
+                progressPct.textContent = '100%';
+                progressBar.style.width = '100%';
+                statusText.textContent = 'Чек успешно распознан (OCR)';
+                const cleanLine = recognizedText.replace(/\s+/g, ' ').trim();
+                rawSnippet.textContent = cleanLine ? `Текст: ${cleanLine.slice(0, 90)}...` : 'Текст не найден, проверьте поля вручную';
+
+                const parsed = parseScreenshotData(recognizedText, file.name, colorHint);
+                populateRecognitionForm(parsed);
+                showToast('Скриншот распознан! Проверьте сумму и категорию справа.', 'success');
+              } catch (ocrErr) {
+                console.warn('Tesseract fallback:', ocrErr);
+                progressPct.textContent = '100%';
+                progressBar.style.width = '100%';
+                statusText.textContent = 'Банк определен по цветовой палитре чека';
+                rawSnippet.textContent = 'Песочница ограничила внешний OCR-воркер: проверьте сумму справа';
+                const parsed = parseScreenshotData('', file.name, colorHint);
+                populateRecognitionForm(parsed);
+                showToast('Банк определен по палитре. Укажите сумму чека в форме справа.', 'info');
+              }
+            } else {
+              progressPct.textContent = '100%';
+              progressBar.style.width = '100%';
+              statusText.textContent = 'Банк определен по цветовой схеме';
+              const parsed = parseScreenshotData('', file.name, colorHint);
+              populateRecognitionForm(parsed);
+              showToast('Банк определен! Уточните сумму операции.', 'info');
+            }
+          };
+          tempImg.src = dataUrl;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // 4. Event Listeners Setup
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+
+      dropZone.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleImageFile(e.target.files[0]);
+          e.target.value = ''; // Reset value so re-uploading the same file triggers change
+        }
+      });
+
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-amber-400', 'bg-slate-900/60');
+      });
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-amber-400', 'bg-slate-900/60');
+      });
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-amber-400', 'bg-slate-900/60');
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          handleImageFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      // Global Clipboard Paste (Ctrl+V / Cmd+V) for images and receipt text
+      window.addEventListener('paste', (e) => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+
+        if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length > 0) {
+          const file = e.clipboardData.files[0];
+          if (file.type.startsWith('image/')) {
+            e.preventDefault();
+            handleImageFile(file);
+            return;
+          }
+        }
+        const pastedText = e.clipboardData ? e.clipboardData.getData('text') : '';
+        if (pastedText && pastedText.trim().length > 3) {
+          setEditModeUI(false);
+          const parsed = parseScreenshotData(pastedText, '');
+          populateRecognitionForm(parsed);
+          document.getElementById('rawReceiptTextInput').value = pastedText.trim();
+          showToast('Текст чека из буфера обмена разобран!', 'success');
+        }
+      });
+
+      // Raw Text Parser Button
+      document.getElementById('btnParseRawText').addEventListener('click', () => {
+        const rawText = document.getElementById('rawReceiptTextInput').value.trim();
+        if (!rawText) {
+          showToast('Вставьте текст СМС или чека в поле слева', 'warning');
+          return;
+        }
+        setEditModeUI(false);
+        const parsed = parseScreenshotData(rawText, '');
+        populateRecognitionForm(parsed);
+        showToast('Текст чека успешно разобран! Проверьте карточку справа.', 'success');
+      });
+
+      // Demo buttons with visual receipt canvas generation
+      document.getElementById('btnDemoTBank').addEventListener('click', () => {
+        setEditModeUI(false);
+        const text = 'Т-Банк Дебетовая карта Black Покупка -1 840,50 ₽ ВкусВилл 14 октября 2026';
+        const dataUrl = generateDemoReceiptDataUrl('tbank', 'Т-Банк • Чек операции', '- 1 840,50 ₽', 'Магазин: ВкусВилл', '14.10.2026');
+        document.getElementById('ocrPreviewContainer').classList.remove('hidden');
+        document.getElementById('imgPreviewThumb').src = dataUrl;
+        document.getElementById('ocrStatusText').textContent = 'Распознан макет чека Т-Банка';
+        document.getElementById('ocrProgressPct').textContent = '100%';
+        document.getElementById('ocrProgressBar').style.width = '100%';
+        document.getElementById('ocrRawSnippet').textContent = text;
+
+        const parsed = parseScreenshotData(text, 'tbank_receipt.png', 'tbank');
+        populateRecognitionForm(parsed);
+        showToast('Макет чека Т-Банка распознан', 'success');
+      });
+
+      document.getElementById('btnDemoSber').addEventListener('click', () => {
+        setEditModeUI(false);
+        const text = 'ПАО Сбербанк Чек по операции Покупка -3 450.00 ₽ Аптека Столички 13.10.2026';
+        const dataUrl = generateDemoReceiptDataUrl('sber', 'СберБанк Онлайн', '- 3 450 ₽', 'Аптека Столички', '13.10.2026');
+        document.getElementById('ocrPreviewContainer').classList.remove('hidden');
+        document.getElementById('imgPreviewThumb').src = dataUrl;
+        document.getElementById('ocrStatusText').textContent = 'Распознан макет чека Сбербанка';
+        document.getElementById('ocrProgressPct').textContent = '100%';
+        document.getElementById('ocrProgressBar').style.width = '100%';
+        document.getElementById('ocrRawSnippet').textContent = text;
+
+        const parsed = parseScreenshotData(text, 'sber_receipt.png', 'sber');
+        populateRecognitionForm(parsed);
+        showToast('Макет чека Сбербанка распознан', 'success');
+      });
+
+      document.getElementById('btnDemoIncome').addEventListener('click', () => {
+        setEditModeUI(false);
+        const text = 'Т-Банк Входящий перевод СБП +15 000.00 ₽ Перевод по СБП 15.10.2026';
+        const dataUrl = generateDemoReceiptDataUrl('tbank', 'Т-Банк • Пополнение СБП', '+ 15 000 ₽', 'Входящий перевод по СБП', '15.10.2026');
+        document.getElementById('ocrPreviewContainer').classList.remove('hidden');
+        document.getElementById('imgPreviewThumb').src = dataUrl;
+        document.getElementById('ocrStatusText').textContent = 'Распознан входящий перевод СБП';
+        document.getElementById('ocrProgressPct').textContent = '100%';
+        document.getElementById('ocrProgressBar').style.width = '100%';
+        document.getElementById('ocrRawSnippet').textContent = text;
+
+        const parsed = parseScreenshotData(text, 'tbank_transfer.png', 'tbank');
+        populateRecognitionForm(parsed);
+        showToast('Макет пополнения СБП распознан', 'success');
+      });
+
+      // Cancel Edit Mode
+      document.getElementById('btnCancelEditMode').addEventListener('click', () => {
+        setEditModeUI(false);
+        document.getElementById('recAmount').value = '';
+        document.getElementById('recMerchant').value = '';
+        document.getElementById('detectedBankBadge').textContent = 'Ожидание файла';
+        document.getElementById('detectedBankBadge').className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400';
+        showToast('Редактирование отменено', 'info');
+      });
+
+      // Save Recognized Transaction Button
+      document.getElementById('btnSaveRecognized').addEventListener('click', () => {
+        const amount = parseFloat(document.getElementById('recAmount').value);
+        const merchant = document.getElementById('recMerchant').value.trim() || 'Операция без названия';
+        const bank = document.getElementById('recBank').value;
+        const category = document.getElementById('recCategory').value;
+        const type = document.getElementById('recType').value;
+        const date = document.getElementById('recDate').value || new Date().toISOString().split('T')[0];
+
+        if (isNaN(amount) || amount <= 0) {
+          showToast('Пожалуйста, укажите корректную сумму операции', 'warning');
+          return;
+        }
+
+        if (editingTxId) {
+          const idx = transactions.findIndex(t => t.id === editingTxId);
+          if (idx !== -1) {
+            transactions[idx] = { id: editingTxId, date, bank, merchant, category, amount, type };
+          }
+          setEditModeUI(false);
+          showToast(`Операция "${merchant}" обновлена!`, 'success');
+        } else {
+          const newTx = {
+            id: Date.now().toString(),
+            date,
+            bank,
+            merchant,
+            category,
+            amount,
+            type
+          };
+          transactions.unshift(newTx);
+          showToast(`Операция "${merchant}" на ${formatRub(amount)} успешно сохранена!`, 'success');
+        }
+
+        refreshAll();
+
+        document.getElementById('recAmount').value = '';
+        document.getElementById('recMerchant').value = '';
+        document.getElementById('detectedBankBadge').textContent = 'Ожидание файла';
+        document.getElementById('detectedBankBadge').className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400';
+      });
+
+      // Edit & Delete Row Button Delegation
+      document.getElementById('transactionsTableBody').addEventListener('click', (e) => {
+        const editBtn = e.target.closest('.btnEditRow');
+        if (editBtn) {
+          const id = editBtn.getAttribute('data-id');
+          const tx = transactions.find(t => t.id === id);
+          if (tx) {
+            editingTxId = tx.id;
+            setEditModeUI(true);
+            populateRecognitionForm(tx);
+            document.getElementById('recognitionBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            showToast('Измените поля в карточке и нажмите «Сохранить изменения»', 'info');
+          }
+          return;
+        }
+
+        const btn = e.target.closest('.btnDeleteRow');
+        if (btn) {
+          const id = btn.getAttribute('data-id');
+          transactions = transactions.filter(t => t.id !== id);
+          if (editingTxId === id) setEditModeUI(false);
+          refreshAll();
+          showToast('Операция удалена', 'info');
+        }
+      });
+
+      // Budget Limit Listener
+      document.getElementById('budgetLimitInput').addEventListener('change', (e) => {
+        const val = parseFloat(e.target.value);
+        if (!isNaN(val) && val > 0) {
+          monthlyBudget = val;
+          refreshAll();
+          showToast(`Месячный лимит обновлен: ${formatRub(val)}`, 'success');
+        }
+      });
+
+      // Filters
+      document.getElementById('filterType').addEventListener('change', renderTable);
+      document.getElementById('filterBank').addEventListener('change', renderTable);
+      document.getElementById('filterCategory').addEventListener('change', renderTable);
+      document.getElementById('filterSearch').addEventListener('input', renderTable);
+
+      // Manual Modal Controls
+      const manualModal = document.getElementById('manualModal');
+      document.getElementById('btnOpenManualModal').addEventListener('click', () => {
+        document.getElementById('manDate').value = new Date().toISOString().split('T')[0];
+        document.getElementById('manAmount').value = '';
+        document.getElementById('manMerchant').value = '';
+        manualModal.classList.remove('hidden');
+      });
+      document.getElementById('btnCloseManualModal').addEventListener('click', () => manualModal.classList.add('hidden'));
+      document.getElementById('btnCancelManual').addEventListener('click', () => manualModal.classList.add('hidden'));
+
+      document.getElementById('btnSubmitManual').addEventListener('click', () => {
+        const amount = parseFloat(document.getElementById('manAmount').value);
+        const merchant = document.getElementById('manMerchant').value.trim() || 'Ручная операция';
+        const type = document.getElementById('manType').value;
+        const bank = document.getElementById('manBank').value;
+        const category = document.getElementById('manCategory').value;
+        const date = document.getElementById('manDate').value || new Date().toISOString().split('T')[0];
+
+        if (isNaN(amount) || amount <= 0) {
+          showToast('Введите корректную сумму', 'warning');
+          return;
+        }
+
+        const newTx = {
+          id: Date.now().toString(),
+          date,
+          bank,
+          merchant,
+          category,
+          amount,
+          type
+        };
+
+        transactions.unshift(newTx);
+        refreshAll();
+        manualModal.classList.add('hidden');
+        showToast('Операция добавлена вручную', 'success');
+      });
+
+      // Export CSV
+      document.getElementById('btnExportCSV').addEventListener('click', () => {
+        if (transactions.length === 0) {
+          showToast('Нет операций для экспорта', 'warning');
+          return;
+        }
+        let csv = 'ID,Дата,Банк,Тип,Описание,Категория,Сумма(₽)\n';
+        transactions.forEach(t => {
+          const safeMerchant = String(t.merchant || '').replace(/"/g, '""');
+          csv += `"${t.id}","${t.date}","${t.bank === 'tbank' ? 'Т-Банк' : 'Сбербанк'}","${t.type}","${safeMerchant}","${t.category}",${t.amount}\n`;
+        });
+        const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `fin_analytics_${new Date().toISOString().split('T')[0]}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast('Файл CSV успешно скачан', 'success');
+      });
+
+      // Import CSV (Cross-device sync between iPhone & PC)
+      const csvImportInput = document.getElementById('csvImportInput');
+      document.getElementById('btnImportCSV').addEventListener('click', () => csvImportInput.click());
+      csvImportInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          const content = String(ev.target.result || '').replace(/^\uFEFF/, '');
+          const lines = content.split(/\r?\n/).filter(l => l.trim().length > 0);
+          if (lines.length < 2) {
+            showToast('Файл CSV пуст или поврежден', 'warning');
+            return;
+          }
+          let importedCount = 0;
+          for (let i = 1; i < lines.length; i++) {
+            const cols = lines[i].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+            if (cols && cols.length >= 7) {
+              const clean = cols.map(c => c.replace(/^"|"$/g, '').replace(/""/g, '"'));
+              const amt = parseFloat(clean[6]);
+              if (!isNaN(amt) && amt > 0) {
+                const txObj = {
+                  id: clean[0] || (Date.now() + '-' + i),
+                  date: clean[1] || new Date().toISOString().split('T')[0],
+                  bank: clean[2].toLowerCase().includes('сбер') ? 'sber' : 'tbank',
+                  type: clean[3] === 'income' ? 'income' : 'expense',
+                  merchant: clean[4] || 'Импорт CSV',
+                  category: clean[5] || 'Другое',
+                  amount: amt
+                };
+                if (!transactions.some(existing => existing.id === txObj.id)) {
+                  transactions.push(txObj);
+                  importedCount++;
+                }
+              }
+            }
+          }
+          refreshAll();
+          showToast(`Импортировано новых операций: ${importedCount}`, 'success');
+          e.target.value = '';
+        };
+        reader.readAsText(file, 'utf-8');
+      });
+
+      // Reset Data Confirmation Modal
+      const resetModal = document.getElementById('resetConfirmModal');
+      document.getElementById('btnResetData').addEventListener('click', () => {
+        resetModal.classList.remove('hidden');
+      });
+      document.getElementById('btnCancelReset').addEventListener('click', () => {
+        resetModal.classList.add('hidden');
+      });
+      document.getElementById('btnConfirmReset').addEventListener('click', () => {
+        transactions = [...INITIAL_DATA];
+        setEditModeUI(false);
+        refreshAll();
+        resetModal.classList.add('hidden');
+        showToast('Данные сброшены к начальным значениям', 'info');
+      });
+
+      // Refresh Insights
+      document.getElementById('btnRefreshInsights').addEventListener('click', () => {
+        updateStats();
+        showToast('AI Аналитика и инсайты обновлены', 'success');
+      });
+
+      // Set default date for recognition box
+      document.getElementById('recDate').value = new Date().toISOString().split('T')[0];
+
+      // Initial Launch
+      refreshAll();
+
+      // If this line is reached, JavaScript and the app's initial rendering work.
+      const runtimeNotice = document.getElementById('runtimeNotice');
+      if (runtimeNotice) runtimeNotice.style.display = 'none';
+    })();
+  </script>
+</body>
+</html>
