@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10131c"><title>Финансовый аналитик — Т-Банк и Сбербанк</title>
+<style>
+:root{color-scheme:dark;--bg:#0e1119;--panel:#171c28;--panel2:#1d2432;--line:#2b3445;--text:#f3f5fa;--muted:#9ca8bb;--lime:#c4f36b;--red:#ff7f87;--blue:#7db8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b2634 0,#0e1119 52%);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:auto;padding:22px 16px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:var(--lime);color:#10131c;display:grid;place-items:center;font-weight:900;font-size:22px}.eyebrow{font-size:11px;color:var(--lime);letter-spacing:.14em;text-transform:uppercase}.title{font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-.04em;margin:4px 0}.sub{color:var(--muted);font-size:13px}.badge{border:1px solid var(--line);border-radius:99px;padding:8px 12px;color:var(--muted);font-size:12px;white-space:nowrap}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}.metric,.panel{background:linear-gradient(145deg,#1a202d,#151a25);border:1px solid var(--line);border-radius:18px}.metric{padding:18px}.metric label{color:var(--muted);font-size:12px}.value{font-size:clamp(19px,3.5vw,28px);font-weight:800;letter-spacing:-.03em;margin-top:9px;overflow-wrap:anywhere}.green{color:var(--lime)}.red{color:var(--red)}.grid{display:grid;grid-template-columns: minmax(0, .88fr) minmax(0,1.4fr);gap:16px}.panel{padding:18px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.panel h2{font-size:17px;margin:0;letter-spacing:-.02em}.hint{color:var(--muted);font-size:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}label.field{display:flex;flex-direction:column;gap:7px;color:var(--muted);font-size:12px}.wide{grid-column:1/-1}input,select,textarea{width:100%;background:#101520;border:1px solid #303a4c;color:var(--text);border-radius:10px;padding:12px;font:inherit;min-width:0;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--lime)}textarea{resize:vertical;min-height:44px}button,.filebtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 13px;border-radius:11px;font:600 13px inherit;cursor:pointer;transition:.15s}button:hover,.filebtn:hover{border-color:#7d8da7;filter:brightness(1.1)}button.primary{background:var(--lime);color:#10131c;border-color:var(--lime)}button.danger{color:var(--red)}button:active{transform:scale(.98)}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.bankrow{display:flex;gap:8px;margin-top:12px}.bankrow button{flex:1}.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:12px}th{color:var(--muted);font-weight:600;background:#121722}tr:last-child td{border-bottom:0}.amount{font-weight:750;white-space:nowrap}.empty{text-align:center;color:var(--muted);padding:28px}.tag{display:inline-block;padding:4px 7px;border-radius:6px;background:#263142;color:#c7d2e4;font-size:10px}.income{color:var(--lime)}.expense{color:var(--red)}.smallbtn{padding:6px 8px;font-size:11px}.footer{margin-top:14px;color:var(--muted);font-size:11px;line-height:1.6}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#e8f7ce;color:#17200e;padding:12px 16px;border-radius:12px;font-weight:700;box-shadow:0 10px 35px #0007;z-index:5;max-width:90vw;display:none}.hidden{display:none!important}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.metrics{gap:8px}.metric{padding:13px}.top{align-items:flex-start}.badge{font-size:10px}.wrap{padding:18px 12px 40px}.panel{padding:14px}}
+@media(max-width:380px){.metrics{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center}.value{margin:0}.formgrid{grid-template-columns:1fr}.wide{grid-column:auto}}
+</style></head>
+<body><main class="wrap">
+<header class="top"><div class="brand"><div class="logo">₽</div><div><div class="eyebrow">Personal finance OS</div><h1 class="title">Финансовый аналитик</h1><div class="sub">Т-Банк · Сбербанк · ручной учёт</div></div></div><div class="badge">● Локальный режим</div></header>
+<section class="metrics">
+<div class="metric"><label>Баланс операций</label><div class="value" id="balance">0 ₽</div></div>
+<div class="metric"><label>Доходы</label><div class="value green" id="income">0 ₽</div></div>
+<div class="metric"><label>Расходы</label><div class="value red" id="expense">0 ₽</div></div>
+</section>
+<div class="grid"><section class="panel"><div class="panel-head"><h2>Новая операция</h2><span class="hint">Заполнение вручную</span></div>
+<form id="entryForm"><div class="formgrid">
+<label class="field">Тип операции<select id="type"><option value="expense">Расход</option><option value="income">Доход</option></select></label>
+<label class="field">Банк<select id="bank"><option>Т-Банк</option><option>Сбербанк</option><option>Наличные</option><option>Другой</option></select></label>
+<label class="field">Сумма, ₽<input id="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="1500" required></label>
+<label class="field">Дата<input id="date" type="date" required></label>
+<label class="field">Категория<select id="category"><option>Продукты</option><option>Транспорт</option><option>Жильё</option><option>Кафе и досуг</option><option>Здоровье</option><option>Покупки</option><option>Подписки</option><option>Зарплата</option><option>Перевод</option><option>Другое</option></select></label>
+<label class="field">Комментарий<input id="note" maxlength="120" placeholder="Необязательно"></label>
+</div><div class="actions"><button class="primary" type="submit">＋ Добавить операцию</button><button type="reset" id="clearForm">Очистить</button></div></form>
+<div class="bankrow"><button type="button" id="demoT">＋ Т-Банк</button><button type="button" id="demoS">＋ Сбербанк</button></div>
+<div class="footer">Данные хранятся в локальном хранилище этого браузера на устройстве. Это не подключение к банковскому счёту: операции вводятся вручную.</div>
+</section>
+<section class="panel"><div class="panel-head"><h2>История операций</h2><span id="count" class="hint">0 операций</span></div>
+<div class="filters"><label class="field">Банк<select id="filterBank"><option value="">Все банки</option><option>Т-Банк</option><option>Сбербанк</option><option>Наличные</option><option>Другой</option></select></label><label class="field">Тип<select id="filterType"><option value="">Все операции</option><option value="income">Доходы</option><option value="expense">Расходы</option></select></label><label class="field">С даты<input id="fromDate" type="date"></label><label class="field">По дату<input id="toDate" type="date"></label></div>
+<div class="actions" style="margin:0 0 12px"><button id="exportBtn" type="button">Экспорт CSV</button><label class="filebtn">Импорт CSV<input id="importFile" type="file" accept=".csv,text/csv" class="hidden"></label><button id="resetBtn" type="button" class="danger">Удалить все</button></div>
+<div class="tablewrap"><table><thead><tr><th>Дата</th><th>Операция</th><th>Категория / банк</th><th>Сумма</th><th></th></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty">Пока нет операций.<br>Добавь первую слева.</div></div>
+<div class="footer" id="summary">Добавь операции, чтобы увидеть сводку.</div></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id), KEY='financeAnalyticsTransactions_v1';
+let tx=[];
+try{const raw=localStorage.getItem(KEY);tx=raw?JSON.parse(raw):[];if(!Array.isArray(tx))tx=[];}catch(e){tx=[];}
+const money=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:2}).format(n);
+const today=()=>new Date().toLocaleDateString('en-CA');
+$('date').value=today();
+function toast(msg){const el=$('toast');el.textContent=msg;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',2400);}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(tx));}catch(e){toast('Не удалось сохранить данные браузера');}}
+function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function visible(){return tx.filter(t=>(!$('filterBank').value||t.bank===$('filterBank').value)&&(!$('filterType').value||t.type===$('filterType').value)&&(!$('fromDate').value||t.date>=$('fromDate').value)&&(!$('toDate').value||t.date<=$('toDate').value)).sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created);}
+function render(){
+const list=visible(), inc=list.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0), exp=list.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+$('income').textContent=money(inc);$('expense').textContent=money(exp);$('balance').textContent=money(inc-exp);$('balance').className='value '+(inc-exp<0?'red':'green');$('count').textContent=list.length+' '+(list.length===1?'операция':list.length>1&&list.length<5?'операции':'операций');
+$('empty').classList.toggle('hidden',list.length>0);
+$('rows').innerHTML=list.map(t=>'<tr><td>'+safe(t.date)+'</td><td><span class="tag">'+(t.type==='income'?'Доход':'Расход')+'</span><div style="margin-top:5px;color:#9ca8bb">'+safe(t.note||'—')+'</div></td><td>'+safe(t.category)+'<div style="margin-top:5px;color:#9ca8bb">'+safe(t.bank)+'</div></td><td class="amount '+(t.type==='income'?'income':'expense')+'">'+(t.type==='income'?'+':'−')+money(t.amount)+'</td><td><button type="button" class="smallbtn danger" data-delete="'+safe(t.id)+'" aria-label="Удалить операцию">✕</button></td></tr>').join('');
+const cats={};list.filter(t=>t.type==='expense').forEach(t=>cats[t.category]=(cats[t.category]||0)+t.amount);
+const top=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,3);
+$('summary').textContent=list.length?('Топ категорий расходов: '+(top.length?top.map(([k,v])=>k+' — '+money(v)).join(' · '):'нет расходов')+'. Сводка учитывает выбранные фильтры.'):'Добавь операции, чтобы увидеть сводку.';
+}
+$('entryForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('amount').value);if(!Number.isFinite(amount)||amount<=0){toast('Укажи сумму больше нуля');return;}tx.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),type:$('type').value,bank:$('bank').value,amount,date:$('date').value||today(),category:$('category').value,note:$('note').value.trim(),created:Date.now()});save();render();$('amount').value='';$('note').value='';$('amount').focus();toast('Операция добавлена');});
+$('rows').addEventListener('click',e=>{const b=e.target.closest('[data-delete]');if(!b)return;const item=tx.find(t=>t.id===b.dataset.delete);if(item&&confirm('Удалить операцию на '+money(item.amount)+'?')){tx=tx.filter(t=>t.id!==item.id);save();render();toast('Операция удалена');}});
+['filterBank','filterType','fromDate','toDate'].forEach(id=>$(id).addEventListener('change',render));
+$('clearForm').addEventListener('click',()=>setTimeout(()=>{$('date').value=today();},0));
+function addDemo(bank){$('bank').value=bank;$('type').value='expense';$('category').value='Продукты';$('amount').focus();toast('Банк выбран: '+bank+' — заполни сумму и добавь операцию');}
+$('demoT').addEventListener('click',()=>addDemo('Т-Банк'));$('demoS').addEventListener('click',()=>addDemo('Сбербанк'));
+$('resetBtn').addEventListener('click',()=>{if(!tx.length){toast('Операций пока нет');return;}if(confirm('Удалить все '+tx.length+' операций? Это действие нельзя отменить.')){tx=[];save();render();toast('История очищена');}});
+function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"';}
+$('exportBtn').addEventListener('click',()=>{if(!tx.length){toast('Нет операций для экспорта');return;}const head=['date','type','bank','amount','category','note'];const lines=[head,...tx.map(t=>head.map(k=>t[k]))].map(row=>row.map(csvCell).join(';'));const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='finance-operations.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('CSV подготовлен');});
+$('importFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const text=await f.text();const lines=text.replace(/^\ufeff/,'').split(/\r?\n/).filter(Boolean);if(lines.length<2)throw Error('empty');const parse=line=>{const out=[];let v='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&q&&line[i+1]==='"'){v+='"';i++;}else if(c==='"')q=!q;else if((c===';'||c===',')&&!q){out.push(v);v='';}else v+=c;}out.push(v);return out;};const headers=parse(lines[0]).map(x=>x.trim().toLowerCase());const idx=k=>headers.indexOf(k);const get=(r,k)=>idx(k)>=0?r[idx(k)]||'':'';let added=0;for(const line of lines.slice(1)){const r=parse(line),amount=Number(String(get(r,'amount')).replace(',','.'));if(!Number.isFinite(amount)||amount<=0)continue;const type=get(r,'type')==='income'?'income':'expense';tx.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),date:/^\d{4}-\d{2}-\d{2}$/.test(get(r,'date'))?get(r,'date'):today(),type,bank:get(r,'bank')||'Другой',amount,category:get(r,'category')||'Другое',note:get(r,'note'),created:Date.now()+added});added++;}save();render();toast('Импортировано операций: '+added);}catch(err){toast('Не удалось прочитать CSV. Проверь формат файла.');}finally{e.target.value='';}});
+render();
+})();
+</script></body></html>
